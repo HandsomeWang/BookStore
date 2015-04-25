@@ -1,0 +1,11 @@
+
+*{font-size:10pt;padding: 0px; margin: 0px;}
+body{text-align:center;overflow: hidden;}
+.table{width:1200px;border:1px solid #15B69A;border-collapse: collapse;}
+.table td{border:1px solid #15B69A;}
+.trTop {text-align: center; height: 75px;}
+.trMiddle{text-align: center; height: 85px;}
+.tdleft{text-align: center; width: 230px;}
+.trBottom{height: 456px;}
+
+iframe {width: 100%;height: 100% ;}

@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+    "http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+	<constant name="struts.action.extension" value="action" />
+	<constant name="struts.custom.i18n.resources" value="resource"></constant>
+	<constant name="struts.i18n.encoding" value="UTF-8"></constant>
+	<package name="bookstore" namespace="/" extends="struts-default">
+	
+		<!-- <action name="listhotbooks" class="action.BooksAction"
+			method="listhotbooks">
+			<result>jsps/body.jsp</result>
+		</action> -->
+		<action name="listhotbooksdetail" class="action.BooksAction"
+			method="listhotbooksdetail">
+			<result >jsps/list.jsp</result>
+		</action>
+		<action name="listnewbooks" class="action.BooksAction"
+			method="listnewbooks">
+			<result >jsps/list.jsp</result>
+		</action>
+		<action name="listrecommend" class="action.BooksAction"
+			method="listrecommend">
+			<result >jsps/list.jsp</result>
+		</action>
+		<action name="desc" class="action.BooksAction"
+			method="desc">
+			<result >jsps/desc.jsp</result>
+		</action>
+		<action name="userselect" class="action.BooksAction"
+			method="userselect">
+			<result name="success">jsps/list.jsp</result>
+			<result name="error">jsps/nofound.jsp</result>
+		</action>
+		<action name="type" class="action.BooksAction"
+			method="type">
+			<result name="success">jsps/list.jsp</result>
+			<result name="error">jsps/nofound.jsp</result>
+		</action>
+		<action name="registaction" class="action.UserAction"
+			method="registaction">
+			<result name="success">jsps/registinfo.jsp</result>
+		</action>
+		<action name="updateuser" class="action.UserAction"
+			method="updateuser">
+			<result name="success">jsps/updateuser.jsp</result>
+		</action>
+		<action name="updateusersure" class="action.UserAction"
+			method="updateusersure">
+			<result>jsps/updatesuc.jsp</result>
+			<result name="error">index.jsp</result>
+		</action>
+		<action name="updatepwd" class="action.UserAction"
+			method="updatepwd">
+			<result>jsps/updatesuc.jsp</result>
+			<result name="error">index.jsp</result>
+		</action>
+		<action name="check" class="action.UserAction"
+			method="check">
+			<result name="success" type="stream">yes</result>
+			<result name="error" type="stream">no</result>
+		</action>
+		<action name="login" class="action.UserAction"
+			method="login">
+			<result>jsps/logininfo.jsp</result>
+		</action>
+		<action name="exit" class="action.UserAction"
+			method="exit">
+			<result>/jsps/main.jsp</result>
+		</action>
+		<action name="addcart" class="action.CartAction"
+			method="addcart">
+			<result name="success" type="chain" >mycart</result>
+			<result name="error1">jsps/nologin.jsp</result>
+			<result name="error2">jsps/nobook.jsp</result>
+		</action>
+		<action name="mycart" class="action.CartAction"
+			method="mycart">
+			<result name="success">jsps/cart.jsp</result>
+			<result name="error">jsps/nologin.jsp</result>
+		</action>
+		<action name="msg" class="action.MsgAction"
+			method="msg" >
+			<result name="success" >jsps/msg.jsp</result>
+			<result name="error">jsps/nologin.jsp</result>
+		</action>
+		<action name="addmsg" class="action.MsgAction"
+			method="addmsg" >
+			<result name="success">jsps/addmsgsuccess.jsp</result>
+			<result name="error">jsps/addmsgerror.jsp</result>
+		</action>
+		<action name="userdeletemsg" class="action.MsgAction"
+			method="deletemsg">
+			<result type="chain">msg</result>
+			<result name="error">jsps/addmsgerror.jsp</result>
+		</action>
+		<action name="changesum" class="action.CartAction"
+			method="changesum">
+			<result name="success" type="stream">yes</result>
+			<result name="error" type="stream">no</result>
+		</action>
+		<action name="deleteitem" class="action.CartAction"
+			method="deleteitem">
+			<result name="success" type="stream">yes</result>
+			<result name="error" type="stream">no</result>
+		</action>
+		<action name="myorder" class="action.OrderAction"
+			method="myorder" >
+			<result>jsps/order.jsp</result>
+			<result name="error">jsps/nologin.jsp</result>
+		</action>
+		<action name="adminorder" class="action.OrderAction"
+			method="adminorder" >
+			<result>/jsps/adminjsps/admin/order.jsp</result>
+		</action>
+		<action name="adminorder_s" class="action.OrderAction"
+			method="adminorder_s" >
+			<result>/jsps/adminjsps/admin/order.jsp</result>
+		</action>
+		<action name="changestatus" class="action.OrderAction"
+			method="changestatus" >
+			<result type="chain">myorder</result>
+			<result name="error">jsps/error.jsp</result>
+		</action>
+		<action name="adminchangestatus" class="action.OrderAction"
+			method="adminchangestatus" >
+			<result type="chain">adminorder</result>
+			<result name="error">/jsps/adminjsps/admin/error.jsp</result>
+		</action>
+		<action name="addorder" class="action.OrderAction"
+			method="addorder" >
+			<result type="chain">myorder</result>
+			<result name="error">index.jsp</result>
+		</action>
+		<action name="adminlogin" class="action.AdminAction"
+			method="adminlogin">
+			<result name="success">/jsps/adminjsps/admin/main.jsp</result>
+			<result name="error">/jsps/adminjsps/error.jsp</result>
+		</action>
+		<action name="adminselect" class="action.BooksAction"
+			method="adminselect">
+			<result name="success">/jsps/adminjsps/admin/list.jsp</result>
+			<result name="error">/jsps/adminjsps/admin/nofound.jsp</result>
+		</action>
+		<action name="edit" class="action.BooksAction"
+			method="edit">
+			<result>/jsps/adminjsps/admin/edit.jsp</result>
+		</action>
+		<action name="editsure" class="action.BooksAction"
+			method="editsure">
+			<result >/jsps/adminjsps/admin/editsuc.jsp</result>
+			<result name="error">/jsps/adminjsps/admin/error.jsp</result>
+		</action>
+		<action name="delete" class="action.BooksAction"
+			method="delete">
+			<result >/jsps/adminjsps/admin/delsuc.jsp</result>
+			<result name="error1">/jsps/adminjsps/admin/error.jsp</result>
+			<result name="error2">/jsps/adminjsps/admin/error2.jsp</result>
+		</action>
+		<action name="addbook" class="action.BooksAction"
+			method="addbook">
+			<result >/jsps/adminjsps/admin/editsuc.jsp</result>
+			<result name="error">/jsps/adminjsps/admin/error.jsp</result>
+		</action>
+		<action name="addpic" class="action.BooksAction" method="addpic">
+			<result >/jsps/adminjsps/admin/addbook.jsp</result>
+			<result name="error">/jsps/adminjsps/admin/error.jsp</result>
+		</action>
+		<action name="editpic" class="action.BooksAction" method="editpic">
+			<result type="chain">edit</result>
+			<result name="error">/jsps/adminjsps/admin/error.jsp</result>
+		</action>
+		<action name="showsearch" class="action.BtypeAction"
+			method="showsearch">
+			<result >/jsps/search.jsp</result>
+		</action>
+		<action name="adminshowsearch" class="action.BtypeAction"
+			method="showsearch">
+			<result >/jsps/adminjsps/admin/search.jsp</result>
+		</action>
+		<action name="showdynamic" class="action.BtypeAction"
+			method="showdynamic">
+			<result >/jsps/showdynamic.jsp</result>
+		</action>
+		<action name="showaddbook" class="action.BtypeAction"
+			method="showsearch">
+			<result >/jsps/adminjsps/admin/addbook.jsp</result>
+		</action>
+		<action name="showtype" class="action.BtypeAction"
+			method="showdynamic">
+			<result >/jsps/adminjsps/admin/updatetype.jsp</result>
+		</action>
+		<action name="addtype" class="action.BtypeAction"
+			method="addtype">
+			<result type="chain">showtype</result>
+			<result name="error">/jsps/adminjsps/admin/error.jsp</result>
+		</action>
+		<action name="deletetype" class="action.BtypeAction"
+			method="deletetype">
+			<result type="chain">showtype</result>
+			<result name="error1">/jsps/adminjsps/admin/error.jsp</result>
+			<result name="error2">/jsps/adminjsps/admin/error3.jsp</result>
+		</action>
+		<action name="itemtype" class="action.BtypeAction"
+			method="itemtype">
+			<result>/jsps/adminjsps/admin/itemtype.jsp</result>
+		</action>
+		<action name="updatetypesure" class="action.BtypeAction"
+			method="updatetypesure">
+			<result type="chain">showtype</result>
+			<result name="error">/jsps/adminjsps/admin/error.jsp</result>
+		</action>
+		<action name="adminmsg" class="action.MsgAction"
+			method="adminmsg">
+			<result>/jsps/adminjsps/admin/msg.jsp</result>
+			<result name="error">/jsps/adminjsps/admin/error.jsp</result>
+		</action>
+		<action name="deletemsg" class="action.MsgAction"
+			method="deletemsg">
+			<result type="chain">adminmsg</result>
+			<result name="error">/jsps/adminjsps/admin/error.jsp</result>
+		</action>
+		
+		<action name="shownote" class="action.NoteAction"
+			method="shownote">
+			<result>/jsps/adminjsps/admin/shownote.jsp</result>
+			<result name="error">/jsps/adminjsps/admin/error.jsp</result>
+		</action>
+		<action name="addnote" class="action.NoteAction"
+			method="addnote">
+			<result type="chain">shownote</result>
+			<result name="error">/jsps/adminjsps/admin/error.jsp</result>
+		</action>
+		<action name="deletenote" class="action.NoteAction"
+			method="deletenote">
+			<result type="chain">shownote</result>
+			<result name="error">/jsps/adminjsps/admin/error.jsp</result>
+		</action>
+	</package>
+</struts>

@@ -1,0 +1,48 @@
+SET AUTOCOMMIT=0; 
+BEGIN WORK; 
+
+SELECT inventory FROM books WHERE bid=1 FOR UPDATE; 
+UPDATE books SET inventory = 200 WHERE bid=1 ; 
+
+COMMIT WORK; 
+
+
+
+DELIMITER //
+CREATE TRIGGER addcart_update
+BEFORE update ON cart
+FOR EACH ROW
+BEGIN
+	DECLARE
+		v_inventory INT;
+	SELECT inventory INTO v_inventory FROM books WHERE bid=new.bid;
+	IF v_inventory+old.sum-new.sum<0 THEN
+		DELETE FROM cart where bid=-1;
+	ELSE
+		UPDATE books SET inventory=inventory+old.sum-new.sum where bid=new.bid;
+	END IF; 
+END;
+//
+DELIMITER ;
+
+DELIMITER //
+CREATE TRIGGER addcart_insert
+BEFORE insert ON cart
+FOR EACH ROW
+BEGIN
+	DECLARE
+		v_inventory INT;
+	SELECT inventory INTO v_inventory FROM books WHERE bid=new.bid;
+	IF v_inventory-new.sum<0 THEN
+		DELETE FROM cart where bid=-1;
+	ELSE
+		UPDATE books SET inventory=inventory-new.sum where bid=new.bid;
+	END IF; 
+END;
+//
+DELIMITER ;
+
+DROP TRIGGER addcart_update;
+DROP TRIGGER addcart_insert;
+insert into cart(uid,bid,sum) values ('b',3,1);
+UPDATE cart SET sum=19 WHERE bid=2;
